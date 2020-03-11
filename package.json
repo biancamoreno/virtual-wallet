@@ -52,6 +52,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "jest-runner-prettier": "^0.3.6",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "react-router-dom": "^5.1.2"
   }
 }

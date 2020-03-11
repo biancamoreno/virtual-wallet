@@ -11,6 +11,7 @@ function App() {
           name="description"
           content="Desafio técnico Carteira Virtual desenvolvido para a Stone"
         />
+        <link rel="icon" href="assets/images/favicon.ico" />
       </Helmet>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
