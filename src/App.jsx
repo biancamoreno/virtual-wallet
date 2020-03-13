@@ -1,36 +1,31 @@
-import React from "react";
-import Helmet from "react-helmet";
-import logo from "./assets/images/logo.svg";
+import React from "react"
+import Helmet from "react-helmet"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import Login from './pages/login';
 
 function App() {
   return (
-    <div className="App">
-      <Helmet>
-        <title>Virtual Wallet - Stone</title>
-        <meta
-          name="description"
-          content="Desafio técnico Carteira Virtual desenvolvido para a Stone"
-        />
-        <link rel="icon" href="assets/images/favicon.ico" />
-      </Helmet>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.js</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <div className="App">
+        <Helmet>
+          <title>Virtual Wallet - Stone</title>
+          <meta
+            name="description"
+            content="Desafio técnico Carteira Virtual desenvolvido para a Stone"
+          />
+          <link rel="icon" href="assets/images/favicon.ico" />
+        </Helmet>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
