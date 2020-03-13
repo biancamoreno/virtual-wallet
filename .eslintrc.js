@@ -6,9 +6,9 @@ module.exports = {
     jest: true
   },
   extends: [
+    "plugin:prettier/recommended",
     "plugin:react/recommended",
     "airbnb",
-    "plugin:prettier/recommended",
     "prettier",
     "prettier/react"
   ],
@@ -27,9 +27,9 @@ module.exports = {
   rules: {
     indent: ["error", 2],
     "linebreak-style": ["error", "unix"],
-    semi: ["error", "always"],
+    semi: ["error", "never"],
     "prettier/prettier": "error",
     "arrow-spacing": ["error", { before: true, after: true }],
     "no-console": ["error", { allow: ["warn", "error"] }]
   }
-};
+}
