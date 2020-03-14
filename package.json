@@ -15,9 +15,9 @@
     "react-dom": "^16.13.0",
     "react-helmet": "^5.2.1",
     "react-hot-loader": "^4.12.19",
-    "react-scripts": "^2.1.1",
-    "react-service-worker": "^0.1.1",
-    "react-router-dom": "^5.1.2"
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "2.1.1",
+    "react-service-worker": "^0.1.1"
   },
   "scripts": {
     "start-js": "react-app-rewired start",
