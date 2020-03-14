@@ -1,12 +1,12 @@
-@import "config";
+@import "variables";
 
 .btn {
-  width: 250px;
+  width: 100%;
   height: 40px;
   border-radius: 9px;
   border: 0;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4);
-  background-color: #bebebe;
+  background-color: $light-gray-1;
   box-sizing: border-box;
   outline: none;
   cursor: pointer;
@@ -15,6 +15,7 @@
   color: #fff;
   text-transform: uppercase;
   transition: all 0.3s ease;
+  outline: none;
 
   &:hover {
     opacity: 0.9;
@@ -34,7 +35,7 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: contain;
-      background-color: #bebebe;
+      background-color: $light-gray-1;
       background-image: url(../../images/loader.gif);
     }
   }

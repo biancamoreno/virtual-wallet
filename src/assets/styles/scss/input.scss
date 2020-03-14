@@ -1,0 +1,23 @@
+@import "variables";
+
+.input {
+  width: 100%;
+  height: 40px;
+  border-radius: 9px;
+  box-sizing: border-box;
+  border: 1px solid $light-gray-1;
+  padding: 10px;
+  outline: none;
+  font-size: 14px;
+  color: $secondary;
+  font-weight: bold;
+
+  &::placeholder {
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  &--error {
+    color: $msg-error;
+  }
+}

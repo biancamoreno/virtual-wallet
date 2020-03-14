@@ -1,0 +1,9 @@
+@import "variables";
+
+.label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-weight: bold;
+  color: $secondary;
+}

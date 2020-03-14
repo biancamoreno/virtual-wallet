@@ -9,6 +9,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "formik": "^2.1.4",
     "react": "^16.13.0",
     "react-app-rewire-hot-loader": "^2.0.1",
     "react-app-rewire-scss": "^1.0.2",
@@ -17,7 +18,8 @@
     "react-hot-loader": "^4.12.19",
     "react-router-dom": "^5.1.2",
     "react-scripts": "2.1.1",
-    "react-service-worker": "^0.1.1"
+    "react-service-worker": "^0.1.1",
+    "yup": "^0.28.3"
   },
   "scripts": {
     "start-js": "react-app-rewired start",
