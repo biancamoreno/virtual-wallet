@@ -1564,5 +1564,8 @@ table {
 .btn--secondary.loading::before {
   background-color: #171c33;
 }
+.btn[disabled] {
+  cursor: not-allowed;
+}
 
 /*# sourceMappingURL=Button.css.map */

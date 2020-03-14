@@ -59,4 +59,8 @@
       }
     }
   }
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
 }

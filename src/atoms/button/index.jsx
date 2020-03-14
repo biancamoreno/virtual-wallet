@@ -1,5 +1,5 @@
 import React from "react"
-import "../../assets/styles/css/Button.css";
+import "../../assets/styles/css/Button.css"
 
 class Button extends React.Component {
   handleClick = event => {
@@ -11,7 +11,7 @@ class Button extends React.Component {
     return (
       <button
         type="button"
-        className={"btn " + this.props.classes}
+        className={"btn " + (this.props.disabled ? "" : this.props.classes)}
         onClick={this.handleClick}
         disabled={this.props.disabled}
       >
