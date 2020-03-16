@@ -32,7 +32,7 @@
     "eject": "react-app-rewired eject",
     "format": " prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"src/**/*.{js,jsx}\" ",
     "lint": "./node_modules/.bin/eslint **/*.{js,jsx} --quiet",
-    "sass": "sass --watch src/assets/styles/scss:src/assets/styles/css"
+    "sass": "sass --no-source-map --watch src/assets/styles/scss:src/assets/styles/css"
   },
   "eslintConfig": {
     "extends": "react-app"
