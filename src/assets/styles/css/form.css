@@ -1,5 +1,46 @@
+/*
+    Color variable file used in the project
+*/
 .form {
   width: 100%;
+}
+.form__field {
+  position: relative;
+  padding-bottom: 10px;
+}
+.form__field input {
+  width: 100%;
+  height: 40px;
+  border-radius: 9px;
+  box-sizing: border-box;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  outline: none;
+  font-size: 14px;
+  color: #171c33;
+  font-weight: bold;
+}
+.form__field input::placeholder {
+  font-size: 12px;
+  font-weight: normal;
+}
+.form__field input::autofill {
+  font-size: 12px;
+  font-weight: normal;
+}
+.form__field--error input,
+.form__field--error textarea,
+.form__field--error select {
+  color: #f12500;
+}
+.form__field--error input:-webkit-autofill, .form__field--error input:-webkit-autofill:hover, .form__field--error input:-webkit-autofill:focus,
+.form__field--error textarea:-webkit-autofill,
+.form__field--error textarea:-webkit-autofill:hover,
+.form__field--error textarea:-webkit-autofill:focus,
+.form__field--error select:-webkit-autofill,
+.form__field--error select:-webkit-autofill:hover,
+.form__field--error select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #f12500;
 }
 
 /*# sourceMappingURL=form.css.map */

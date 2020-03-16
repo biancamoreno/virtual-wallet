@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React from "react";
 import ReactDOM from "react-dom";
-import "./assets/styles/css/index.css";
 import { AppContainer } from "react-hot-loader";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";

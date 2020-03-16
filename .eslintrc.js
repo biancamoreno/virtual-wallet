@@ -5,6 +5,13 @@ module.exports = {
     serviceworker: true,
     jest: true
   },
+  settings: {
+    "import/resolver": {
+      node: {
+        moduleDirectory: ["node_modules", "src/"]
+      }
+    }
+  },
   extends: [
     "plugin:prettier/recommended",
     "plugin:react/recommended",

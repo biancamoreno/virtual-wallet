@@ -1,5 +1,5 @@
 import React from "react"
-import "../../assets/styles/css/msg-error.css"
+import "@css/msg-error.css"
 
 class MsgError extends React.Component {
   render() {

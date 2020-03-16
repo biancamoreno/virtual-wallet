@@ -1,5 +1,5 @@
 import React from "react"
-import "../../assets/styles/css/label.css"
+import "@css/label.css"
 
 class Label extends React.Component {
   render() {

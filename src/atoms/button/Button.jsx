@@ -1,5 +1,5 @@
 import React from "react"
-import "../../assets/styles/css/button.css"
+import "@css/button.css"
 
 class Button extends React.Component {
   handleClick = event => {

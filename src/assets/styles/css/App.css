@@ -657,6 +657,66 @@ table {
   padding: 25px;
 }
 
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.p-t-30 {
+  padding-top: 30px;
+}
+
+.m-b-30 {
+  margin-bottom: 30px;
+}
+
+.p-b-30 {
+  padding-bottom: 30px;
+}
+
+.m-l-30 {
+  margin-left: 30px;
+}
+
+.p-l-30 {
+  padding-left: 30px;
+}
+
+.m-r-30 {
+  margin-right: 30px;
+}
+
+.p-r-30 {
+  padding-right: 30px;
+}
+
+.m-h-30 {
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.m-v-30 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.m-30 {
+  margin: 30px;
+}
+
+.p-h-30 {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.p-v-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.p-30 {
+  padding: 30px;
+}
+
 .m-t-50 {
   margin-top: 50px;
 }
@@ -1383,6 +1443,66 @@ table {
   padding: 25px;
 }
 
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.p-t-30 {
+  padding-top: 30px;
+}
+
+.m-b-30 {
+  margin-bottom: 30px;
+}
+
+.p-b-30 {
+  padding-bottom: 30px;
+}
+
+.m-l-30 {
+  margin-left: 30px;
+}
+
+.p-l-30 {
+  padding-left: 30px;
+}
+
+.m-r-30 {
+  margin-right: 30px;
+}
+
+.p-r-30 {
+  padding-right: 30px;
+}
+
+.m-h-30 {
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.m-v-30 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.m-30 {
+  margin: 30px;
+}
+
+.p-h-30 {
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.p-v-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.p-30 {
+  padding: 30px;
+}
+
 .m-t-50 {
   margin-top: 50px;
 }
@@ -1501,6 +1621,22 @@ table {
 
 .p-100 {
   padding: 100px;
+}
+
+/*
+    Color variable file used in the project
+*/
+/* Change autocomplete styles in WebKit */
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #171c33;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .container {

@@ -2,18 +2,31 @@
     Setups styles
 */
 
-@import 'mixins';
+@import "mixins";
+@import "variables";
 
-.container {
-    width: 100%;
-    padding: 0 20px;
-    margin: 0 auto;
-    box-sizing: border-box;
+/* Change autocomplete styles in WebKit */
+input,
+textarea,
+select {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: $secondary;
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 }
 
+.container {
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
-@include respond-to('desktop') {
-    .container {
-        max-width: 1140px;
-    }
+@include respond-to("desktop") {
+  .container {
+    max-width: 1140px;
+  }
 }

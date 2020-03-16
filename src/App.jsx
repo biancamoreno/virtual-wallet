@@ -1,8 +1,8 @@
 import React from "react"
 import Helmet from "react-helmet"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Login from './pages/login/Login';
-import "./assets/styles/css/app.css";
+import Login from '@pages/login/Login';
+import "@css/app.css";
 
 function App() {
   return (
