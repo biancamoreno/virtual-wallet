@@ -9,7 +9,6 @@ import db from "@database/db"
 import history from "@utils/history"
 import { storeUser, addUser } from "@actions"
 import store from "@store"
-import classNames from "classnames/bind"
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -50,7 +49,6 @@ function Login() {
         classes: "btn--primary",
         disabled: false,
         label: "Entrar"
-        // handleClick: () => onClickBtn
       }
     ]
   })
@@ -60,21 +58,20 @@ function Login() {
     error: ""
   })
 
-  let [login, setLogin] = useState({
-    id: "",
-    email: "",
-    name: "",
-    password: "",
-    real: 0,
-    btc: 0,
-    brita: 0
-  })
+  let [login, setLogin] = useState({})
 
-  // store.dispatch(addUser("bia", "bia@teste.com", "123Teste"))
+  store.dispatch(addUser("bia", "bia@teste.com", "123Teste"))
+
+  useEffect(() => {
+    if (login.id) {
+      store.dispatch(storeUser(login))
+      history.push("/")
+    }
+  }, [login])
 
   async function getResolve(user) {
     setStates({ loader: false })
-    setStates({ error: user ? "" : "Cadastro não encontrado" })
+    setStates({ error: user && user.id ? "" : "Cadastro não encontrado" })
     if (user && user.id) {
       setLogin({
         id: user.id,
@@ -87,16 +84,6 @@ function Login() {
       })
     }
   }
-
-  useEffect(() => {
-    if (login.id) {
-      async function fetchData() {
-        await store.dispatch(storeUser(login))
-        history.push("/")
-      }
-      fetchData()
-    }
-  }, [login])
 
   function onSubmit(values) {
     db.users

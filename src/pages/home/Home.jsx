@@ -3,15 +3,10 @@ import { useSelector } from "react-redux"
 import history from "@utils/history"
 
 function Home() {
-
-  const login = useSelector(state => state.data)
+  const login = useSelector(state => state.data.user)
   if (!login.id) history.push("/login")
 
-  return (
-    <div className="home container">
-      oi
-    </div>
-  )
+  return <div className="home container">Home</div>
 }
 
 export default Home

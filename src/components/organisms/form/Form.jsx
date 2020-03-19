@@ -23,7 +23,7 @@ class Form extends React.Component {
         />
         {errors[field.name] && touched[field.name] ? (
           <MsgError error={errors[field.name]}></MsgError>
-        ) : null }
+        ) : null}
       </div>
     )
   }
@@ -35,7 +35,6 @@ class Form extends React.Component {
         classes={button.classes + " m-t-10"}
         disabled={button.disabled}
         label={button.label}
-        // handleClick={button.handleClick().bind(this)}
         key={index}
       ></Button>
     )

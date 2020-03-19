@@ -12,7 +12,6 @@ class Button extends React.Component {
       <button
         type={this.props.type}
         className={"btn " + (this.props.disabled ? "" : this.props.classes)}
-        // onClick={this.handleClick}
         disabled={this.props.disabled}
       >
         {this.props.label}
