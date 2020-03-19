@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
+import React, { useState } from "react"
 import Form from "@organisms/form/Form"
 import MsgError from "@atoms/msg-error/MsgError"
 import * as Yup from "yup"
-import "@css/login.css"
-import logo from "@images/cripto.png"
+import "@css/signup.css"
 import db from "@database/db"
+import { addUser } from "@actions"
+import logo from "@images/cripto.png"
 import history from "@utils/history"
-import { storeUser } from "@actions"
 import store from "@store"
 import LinkTo from "@atoms/link/Link"
 
 const LoginSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("Nome obrigatório")
+    .nullable(),
   email: Yup.string()
     .email("E-mail inválido")
     .required("E-mail obrigatório")
@@ -21,16 +23,20 @@ const LoginSchema = Yup.object().shape({
     .nullable()
 })
 
-function Login() {
-  const loginStore = useSelector(state => state.data)
-  if (loginStore.id) history.push("/")
-
+function Signup() {
   const [form] = useState({
     initialValues: {
+      name: "",
       email: "",
       password: ""
     },
     fields: [
+      {
+        name: "name",
+        type: "text",
+        label: "Nome",
+        placeholder: "INSIRA SEU NOME"
+      },
       {
         name: "email",
         type: "email",
@@ -49,7 +55,7 @@ function Login() {
         type: "submit",
         classes: "btn--primary",
         disabled: false,
-        label: "Entrar"
+        label: "Cadastrar"
       }
     ]
   })
@@ -59,70 +65,48 @@ function Login() {
     error: ""
   })
 
-  let [login, setLogin] = useState({})
-
-  useEffect(() => {
-    if (login.id) {
-      store.dispatch(storeUser(login))
-      history.push("/")
-    }
-  }, [login])
-
-  async function getResolve(user) {
-    setStates({ error: "" })
-    if (user && user.id) {
-      setLogin({
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        password: user.password,
-        real: user.real,
-        btc: user.btc,
-        brita: user.brita
-      })
-    }
-  }
-
   function onSubmit(values) {
     setStates({ loader: true })
 
     db.users
       .where({ email: values.email })
-      .first(userEmail => {
-        if (userEmail) {
-          setStates({ loader: false })
-          if (userEmail.password === values.password) getResolve(userEmail)
-          else setStates({ error: "E-mail e/ou senha inválido" })
+      .first(user => {
+        setStates({ loader: false })
+
+        if (user) setStates({ error: "Este e-mail já possui cadastro" })
+        else {
+          store.dispatch(addUser(values.name, values.email, values.password))
+          setStates({ error: "" })
+          history.push("/")
         }
       })
       .catch(error => {
         setStates({ loader: false })
-        setStates({ error: "Falha no login, tente novamente" })
+        setStates({ error: "Falha no cadastro, tente novamente" })
       })
   }
 
   return (
-    <div className="login">
+    <div className="signup">
       <div className="container">
-        <div className="login__form">
-          <img className="login__form__logo m-b-30" alt="Logo" src={logo} />
+        <div className="signup__form">
+          <img className="signup__form__logo m-b-30" alt="Logo" src={logo} />
           <Form
             initialValues={form.initialValues}
             fields={form.fields}
             loginSchema={LoginSchema}
             buttons={form.buttons}
             onSubmitForm={onSubmit}
-            status={formStates.loader}
           ></Form>
           {formStates.error ? (
-            <div className="login__form__error">
+            <div className="signup__form__error">
               <MsgError error={formStates.error}></MsgError>
             </div>
           ) : null}
           <div className="m-t-10">
             <LinkTo
-              to="/cadastro"
-              text="Não possui cadastro? Cadastre-se"
+              to="/login"
+              text="Já possui cadastro?"
             ></LinkTo>
           </div>
         </div>
@@ -131,4 +115,4 @@ function Login() {
   )
 }
 
-export default Login
+export default Signup

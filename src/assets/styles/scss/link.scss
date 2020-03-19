@@ -1,0 +1,7 @@
+@import "variables";
+@import "mixins";
+
+.link {
+  color: $link-color;
+  font-size: 14px;
+}

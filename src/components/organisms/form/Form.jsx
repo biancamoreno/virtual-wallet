@@ -28,13 +28,14 @@ class Form extends React.Component {
     )
   }
 
-  renderButtons(button, index) {
+  renderButtons(button, index, status) {
     return (
       <Button
         type={button.type}
         classes={button.classes + " m-t-10"}
         disabled={button.disabled}
         label={button.label}
+        status={status}
         key={index}
       ></Button>
     )
@@ -54,7 +55,8 @@ class Form extends React.Component {
               {this.props.fields.map(field =>
                 this.renderFields(field, errors, touched)
               )}
-              {this.props.buttons.map(this.renderButtons)}
+              {this.props.buttons.map((button, index) =>
+                this.renderButtons(button, index, this.props.status))}
             </FormBuilder>
           )}
         </Formik>

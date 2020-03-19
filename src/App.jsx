@@ -3,6 +3,7 @@ import Helmet from "react-helmet"
 import { Router, Switch, Route } from "react-router-dom"
 import Login from "@pages/login/Login"
 import Home from "@pages/home/Home"
+import Signup from "@pages/signup/Signup"
 import "@css/app.css"
 import history from "@utils/history"
 
@@ -19,6 +20,7 @@ export default function App() {
           <link rel="icon" href="assets/images/favicon.ico" />
         </Helmet>
         <Switch>
+          <Route path="/cadastro" component={Signup}></Route>
           <Route path="/login" component={Login}></Route>
           <Route exact path="/" component={Home}></Route>
         </Switch>

@@ -1,0 +1,52 @@
+@import "variables";
+@import "mixins";
+
+.signup {
+  @include respond-to("tablet") {
+    background-color: $primary;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include respond-to("tablet") {
+      max-width: 500px;
+      background-color: #fff;
+      border-radius: 9px;
+      padding: 50px 36px;
+    }
+
+    &__logo {
+      width: 100px;
+      height: auto;
+    }
+
+    &__error {
+      position: relative;
+      width: 200px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $msg-error;
+      border-radius: 6px;
+      margin: 20px 0;
+  
+      .msg-error {
+        color: #fff;
+        position: static;
+      }
+    }
+  }
+}
