@@ -39,10 +39,10 @@
   background-image: url(../../images/loader.gif);
 }
 .btn--primary {
-  background-color: #14aa4a;
+  background-color: #0b903d;
 }
 .btn--primary.loading::before {
-  background-color: #14aa4a;
+  background-color: #0b903d;
 }
 .btn--secondary {
   color: #fff;

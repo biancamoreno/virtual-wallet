@@ -23,7 +23,7 @@ class Form extends React.Component {
         />
         {errors[field.name] && touched[field.name] ? (
           <MsgError error={errors[field.name]}></MsgError>
-        ) : null}
+        ) : null }
       </div>
     )
   }
@@ -35,7 +35,7 @@ class Form extends React.Component {
         classes={button.classes + " m-t-10"}
         disabled={button.disabled}
         label={button.label}
-        handleClick={button.handleClick().bind(this)}
+        // handleClick={button.handleClick().bind(this)}
         key={index}
       ></Button>
     )
@@ -48,10 +48,7 @@ class Form extends React.Component {
           validateOnChange
           initialValues={this.props.initialValues}
           validationSchema={this.props.loginSchema}
-          onSubmit={values => {
-            // same shape as initial values
-            console.log(values)
-          }}
+          onSubmit={values => this.props.onSubmitForm(values)}
         >
           {({ errors, touched }) => (
             <FormBuilder>
