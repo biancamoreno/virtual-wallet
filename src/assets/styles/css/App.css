@@ -1649,6 +1649,6 @@ select:-webkit-autofill:focus {
 
 @media (min-width: 1025px) {
   .container {
-    max-width: 1140px;
+    max-width: 1366px;
   }
 }
