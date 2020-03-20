@@ -1,0 +1,7 @@
+@import "variables";
+
+.nav-menu {
+  & > div {
+    background-color: inherit;
+  }
+}

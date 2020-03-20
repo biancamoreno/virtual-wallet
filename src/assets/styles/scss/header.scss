@@ -1,0 +1,10 @@
+@import "variables";
+@import "mixins";
+
+.header {
+  background-color: $light-green-1;
+  
+  @include respond-to("tablet") {
+    background-color: $light-green-1;
+  }
+}
