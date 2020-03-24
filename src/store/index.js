@@ -9,6 +9,8 @@ function users(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "ADD_USER":
       return { ...state, data: {...state.data, user: action.payload }}
+    case "ADD_QUOTATIONS":
+      return { ...state, data: {...state.data, quotations: action.payload}}
     default:
       return state
   }

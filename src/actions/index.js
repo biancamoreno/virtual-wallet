@@ -23,11 +23,31 @@ export function addUser(name, email, password) {
   }
 }
 
+export function updateUser(user) {
+  return dispatch => {
+    db.users.put(user).then(id => {
+      dispatch({
+        type: "ADD_USER",
+        payload: Object.assign({}, user)
+      })
+    })
+  }
+}
+
 export function storeUser(user) {
   return dispatch => {
     dispatch({
       type: "ADD_USER",
       payload: Object.assign({}, user)
+    })
+  }
+}
+
+export function addQuotations(quotations) {
+  return dispatch => {
+    dispatch({
+      type: "ADD_QUOTATIONS",
+      payload: Object.assign({}, quotations)
     })
   }
 }

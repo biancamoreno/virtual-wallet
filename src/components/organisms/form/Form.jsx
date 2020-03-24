@@ -7,20 +7,41 @@ import { Formik, Form as FormBuilder, Field } from "formik"
 import classNames from "classnames"
 
 class Form extends React.Component {
-  renderFields(field, errors, touched) {
+  renderFields(field, errors, touched, values, setFieldValue) {
     let classes = classNames("form__field m-b-10", {
       "form__field--error": errors[field.name] && touched[field.name]
     })
+
+    function handleChange(event) {
+      setFieldValue(event.target.name, event.target.value)
+    }
+
     return (
       <div className={classes} key={field.name}>
         {field.label ? (
           <Label label={field.label} name={field.name}></Label>
         ) : null}
-        <Field
-          name={field.name}
-          type={field.type}
-          placeholder={field.placeholder}
-        />
+        {field.type === "select" ? (
+          <Field
+            as={field.type}
+            name={field.name}
+            value={values[field.name]}
+            onChange={handleChange}
+          >
+            <option value="none" disabled>{field.placeholder}</option>
+            {field.options.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.text}
+              </option>
+            ))}
+          </Field>
+        ) : (
+          <Field
+            name={field.name}
+            type={field.type}
+            placeholder={field.placeholder}
+          />
+        )}
         {errors[field.name] && touched[field.name] ? (
           <MsgError error={errors[field.name]}></MsgError>
         ) : null}
@@ -45,18 +66,20 @@ class Form extends React.Component {
     return (
       <div className="form">
         <Formik
+          enableReinitialize
           validateOnChange
           initialValues={this.props.initialValues}
           validationSchema={this.props.loginSchema}
           onSubmit={values => this.props.onSubmitForm(values)}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, values, setFieldValue }) => (
             <FormBuilder>
               {this.props.fields.map(field =>
-                this.renderFields(field, errors, touched)
+                this.renderFields(field, errors, touched, values, setFieldValue)
               )}
               {this.props.buttons.map((button, index) =>
-                this.renderButtons(button, index, this.props.status))}
+                this.renderButtons(button, index, this.props.status)
+              )}
             </FormBuilder>
           )}
         </Formik>

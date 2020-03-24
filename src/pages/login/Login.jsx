@@ -24,7 +24,7 @@ const LoginSchema = Yup.object().shape({
 function Login() {
   const loginStore = useSelector(state => state.data)
   if (loginStore.id) history.push("/")
-
+  const quotations = useSelector(state => state.data.quotations)
   const [form] = useState({
     initialValues: {
       email: "",
@@ -84,6 +84,11 @@ function Login() {
   }
 
   function onSubmit(values) {
+    if (!quotations) {
+      setStates({ error: "Falha nas cotações" })
+      return
+    }
+
     setStates({ loader: true })
 
     db.users
