@@ -5,6 +5,7 @@ import Label from "@atoms/label/Label"
 import MsgError from "@atoms/msg-error/MsgError"
 import { Formik, Form as FormBuilder, Field } from "formik"
 import classNames from "classnames"
+import NumberFormat from "react-number-format"
 
 class Form extends React.Component {
   renderFields(field, errors, touched, values, setFieldValue) {
@@ -28,13 +29,26 @@ class Form extends React.Component {
             value={values[field.name]}
             onChange={handleChange}
           >
-            <option value="none" disabled>{field.placeholder}</option>
+            <option value="none" disabled>
+              {field.placeholder}
+            </option>
             {field.options.map((option, index) => (
               <option key={index} value={option.value}>
                 {option.text}
               </option>
             ))}
           </Field>
+        ) : field.type === "number" ? (
+          <NumberFormat
+            name={field.name}
+            type="tel"
+            thousandSeparator={"."}
+            decimalSeparator={","}
+            prefix={"$ "}
+            placeholder={field.placeholder}
+            value={values[field.name]}
+            onChange={handleChange}
+          />
         ) : (
           <Field
             name={field.name}

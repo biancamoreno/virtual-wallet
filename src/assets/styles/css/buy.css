@@ -784,87 +784,71 @@
   padding: 100px;
 }
 
-.balance {
-  background-color: #171c33;
-  padding: 20px 0;
-  box-shadow: 0 0px 6px 2px rgba(0, 0, 0, 0.6);
-}
-@media (min-width: 768px) {
-  .balance {
-    display: flex;
-    justify-content: center;
-    height: 80px;
-    box-sizing: border-box;
-  }
-}
-.balance span,
-.balance p {
-  color: #fff;
-  font-size: 16px;
-}
-@media (min-width: 768px) {
-  .balance span,
-.balance p {
-    font-size: 20px;
-    font-weight: 500;
-  }
-}
-.balance__principal {
-  padding-bottom: 15px;
-  margin-bottom: 15px;
-  position: relative;
-}
-@media (min-width: 768px) {
-  .balance__principal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 120px 0 0;
-    padding: 0;
-  }
-}
-.balance__principal::before {
-  content: "";
-  height: 2px;
-  width: 70vw;
-  position: absolute;
-  left: 15vw;
-  bottom: 0;
-  background-color: #fff;
-}
-@media (min-width: 768px) {
-  .balance__principal::before {
-    height: 40px;
-    width: 2px;
-    position: absolute;
-    right: -60px;
-    left: auto;
-    top: 0;
-  }
-}
-.balance__principal > p {
+.buy__title {
+  width: 100%;
   text-align: center;
-  font-size: 16px;
-}
-@media (min-width: 768px) {
-  .balance__principal > p {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0;
-  }
-}
-@media (min-width: 768px) {
-  .balance__principal > p.balance__principal__title {
-    margin-right: 20px;
-  }
-}
-.balance__principal__title {
-  font-size: 14px;
-  text-transform: uppercase;
+  font-size: 18px;
   font-weight: bold;
+  color: #171c33;
 }
-.balance__secondary {
+@media (min-width: 768px) {
+  .buy__title {
+    font-size: 24px;
+  }
+}
+.buy__can-buy__title, .buy__can-buy__item {
+  color: #171c33;
+  font-size: 14px;
+}
+.buy__can-buy__item {
+  font-weight: 600;
+}
+.buy .form {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+@media (min-width: 768px) {
+  .buy .form {
+    width: 70%;
+    max-width: 600px;
+    margin: 0 20px 0 0;
+  }
+}
+.buy .row.reverse {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .buy .row.reverse {
+    flex-direction: row-reverse;
+    align-items: flex-end;
+  }
+}
+.buy__container {
+  display: flex;
+  justify-content: center;
+}
+.buy__container__error {
+  position: relative;
+  width: 200px;
+  height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f12500;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+@media (min-width: 768px) {
+  .buy__container__error {
+    margin-left: -182px;
+  }
+}
+.buy__container__error .msg-error {
+  color: #fff;
+  position: static;
+  margin-top: 0;
+  bottom: 0;
 }

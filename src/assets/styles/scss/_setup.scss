@@ -25,6 +25,14 @@ select {
   box-sizing: border-box;
 }
 
+.row {
+  display: flex;
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+}
+
 @include respond-to("desktop") {
   .container {
     max-width: 1366px;

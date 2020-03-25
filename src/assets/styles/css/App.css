@@ -1647,6 +1647,13 @@ select:-webkit-autofill:focus {
   box-sizing: border-box;
 }
 
+.row {
+  display: flex;
+}
+.row.reverse {
+  flex-direction: row-reverse;
+}
+
 @media (min-width: 1025px) {
   .container {
     max-width: 1366px;

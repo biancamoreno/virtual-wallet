@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <div className="p-v-20">
+        <div className="p-v-5">
           <InfosMenu></InfosMenu>
         </div>
         <Balance></Balance>

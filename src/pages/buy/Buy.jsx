@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import "@css/buy.css"
 import { useSelector } from "react-redux"
 import history from "@utils/history"
 import Form from "@organisms/form/Form"
@@ -75,15 +76,23 @@ function Buy() {
 
   useEffect(() => {
     if (login) {
-      updateCanBuy({ brita: (login.real / quotations.brita.buy), btc: (login.real / quotations.btc.buy)})
+      updateCanBuy({
+        brita: login.real / quotations.brita.buy,
+        btc: login.real / quotations.btc.buy
+      })
     }
-  }, [quotations])
+  }, [login])
 
   async function onSubmit(values) {
     setLoader({ loader: true })
-    if (canBuy[values.currency] >= values.quantity) {
-      login[values.currency] = values.quantity
-      await store.dispatch(updateUser(login))
+    let inputValue = values.quantity.replace("$ ", "")
+    inputValue = inputValue.split(".").join("%")
+    inputValue = inputValue.split(",").join(".")
+    inputValue = parseFloat(inputValue.split("%").join(""))
+    if (canBuy[values.currency] >= inputValue) {
+      login[values.currency] += inputValue
+      login.real = login.real - (quotations[values.currency].buy * inputValue)
+      await store.dispatch(updateUser(login))      
       setMsg({ error: "" })
     } else {
       setMsg({ error: "Saldo insuficiente" })
@@ -92,23 +101,31 @@ function Buy() {
   }
   return (
     <div className="buy">
-      <h1 className="buy__title m-t-20">COMPRAR</h1>
-      <div className="buy__can-buy m-v-20">
-        <p className="buy__can-buy__title m-b-10">Disponível para compra:</p>
-        <p className="buy__can-buy__item">BTC: { canBuy.btc }</p>
-        <p className="buy__can-buy__item">Brita: { canBuy.brita }</p>
+      <h1 className="buy__title m-t-30">COMPRAR</h1>
+      <div className="row reverse m-t-30">
+        <div className="buy__can-buy">
+          <p className="buy__can-buy__title m-b-10">Disponível para compra:</p>
+          <p className="buy__can-buy__item m-b-3">
+            BTC: $ {canBuy && canBuy.btc ? canBuy.btc.toLocaleString("pt-BR") : "..."}
+          </p>
+          <p className="buy__can-buy__item  m-b-3">
+            Brita: $ {canBuy && canBuy.brita ? canBuy.brita.toLocaleString("pt-BR") : "..."}
+          </p>
+        </div>
+        <Form
+          initialValues={form.initialValues}
+          fields={form.fields}
+          loginSchema={LoginSchema}
+          buttons={form.buttons}
+          onSubmitForm={onSubmit}
+          status={loader.loader}
+        ></Form>
       </div>
-      <Form
-        initialValues={form.initialValues}
-        fields={form.fields}
-        loginSchema={LoginSchema}
-        buttons={form.buttons}
-        onSubmitForm={onSubmit}
-        status={loader.loader}
-      ></Form>
       {msg.error ? (
-        <div className="signup__form__error">
-          <MsgError error={msg.error}></MsgError>
+        <div className="buy__container">
+          <div className="buy__container__error">
+            <MsgError error={msg.error}></MsgError>
+          </div>
         </div>
       ) : null}
     </div>

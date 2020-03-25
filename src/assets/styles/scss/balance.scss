@@ -9,7 +9,7 @@
   @include respond-to("tablet") {
     display: flex;
     justify-content: center;
-    height: 100px;
+    height: 80px;
     box-sizing: border-box;
   }
 
@@ -47,7 +47,7 @@
       background-color: #fff;
 
       @include respond-to("tablet") {
-        height: 60px;
+        height: 40px;
         width: 2px;
         position: absolute;
         right: -60px;
@@ -58,10 +58,10 @@
 
     & > p {
       text-align: center;
-      font-size: 20px;
+      font-size: 16px;
 
       @include respond-to("tablet") {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 600;
         margin: 0;
       }
@@ -74,7 +74,7 @@
     }
 
     &__title {
-      font-size: 16px;
+      font-size: 14px;
       text-transform: uppercase;
       font-weight: bold;
     }

@@ -20,11 +20,11 @@ function Balance() {
       <div className="balance__secondary">
         <div className="balance__secondary__item m-r-30">
           <span className="m-r-5">BTC</span>
-          <span>{new Intl.NumberFormat().format(login.btc)}</span>
+          <span>$ {new Intl.NumberFormat("pt-BR").format(login.btc)}</span>
         </div>
         <div className="balance__secondary__item">
           <span className="m-r-5">Brita</span>
-          <span>{new Intl.NumberFormat().format(login.brita)}</span>
+          <span>$ {new Intl.NumberFormat("pt-BR").format(login.brita)}</span>
         </div>
       </div>
     </div>
