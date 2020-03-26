@@ -10,7 +10,7 @@ import history from "@utils/history"
 import store from "@store"
 import LinkTo from "@atoms/link/Link"
 
-const LoginSchema = Yup.object().shape({
+const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .required("Nome obrigatório")
     .nullable(),
@@ -94,7 +94,7 @@ function Signup() {
           <Form
             initialValues={form.initialValues}
             fields={form.fields}
-            loginSchema={LoginSchema}
+            schema={SignupSchema}
             buttons={form.buttons}
             onSubmitForm={onSubmit}
           ></Form>

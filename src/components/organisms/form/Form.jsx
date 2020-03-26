@@ -83,8 +83,11 @@ class Form extends React.Component {
           enableReinitialize
           validateOnChange
           initialValues={this.props.initialValues}
-          validationSchema={this.props.loginSchema}
-          onSubmit={values => this.props.onSubmitForm(values)}
+          validationSchema={this.props.schema}
+          onSubmit={(values, { resetForm }) => {
+            this.props.onSubmitForm(values)
+            resetForm({})
+          }}
         >
           {({ errors, touched, values, setFieldValue }) => (
             <FormBuilder>

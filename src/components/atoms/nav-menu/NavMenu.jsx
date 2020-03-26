@@ -6,8 +6,10 @@ import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 import MenuIcon from "@material-ui/icons/Menu"
 import history from "@utils/history"
+import { storeUser } from "@actions"
+import store from "@store"
 
-const options = ["Início", "Transações", "Compra", "Venda"]
+const options = ["Início", "Transações", "Comprar", "Vender", "Sair"]
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper
@@ -44,6 +46,10 @@ function NavMenu() {
         break
       case 3: 
         history.push("/vender")
+        break
+      case 4:
+        store.dispatch(storeUser({}))
+        history.push("/login")
         break
       default: 
         history.push("/")

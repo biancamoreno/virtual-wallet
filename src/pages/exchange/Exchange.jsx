@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import "@css/buy.css"
+import "@css/sell.css"
 import { useSelector } from "react-redux"
 import history from "@utils/history"
 import Form from "@organisms/form/Form"
@@ -8,7 +8,7 @@ import MsgError from "@atoms/msg-error/MsgError"
 import { updateUser } from "@actions"
 import store from "@store"
 
-const BuySchema = Yup.object().shape({
+const ExchangeSchema = Yup.object().shape({
   currency: Yup.string()
     .required("Seleção de moeda obrigatória")
     .nullable(),
@@ -17,7 +17,7 @@ const BuySchema = Yup.object().shape({
     .nullable()
 })
 
-function Buy() {
+function Exchange() {
   const login = useSelector(state => state.data.user)
   if (login) {
     if (!login.id) history.push("/login")
@@ -56,12 +56,12 @@ function Buy() {
         type: "submit",
         classes: "btn--primary",
         disabled: false,
-        label: "Comprar"
+        label: "Vender"
       }
     ]
   })
 
-  const [canBuy, updateCanBuy] = useState({
+  const [canSell, updateCanSell] = useState({
     brita: 0,
     btc: 0
   })
@@ -76,9 +76,9 @@ function Buy() {
 
   useEffect(() => {
     if (login) {
-      updateCanBuy({
-        brita: login.real / quotations.brita.buy,
-        btc: login.real / quotations.btc.buy
+      updateCanSell({
+        brita: login.brita,
+        btc: login.btc
       })
     }
   }, [login])
@@ -90,42 +90,42 @@ function Buy() {
     inputValue = inputValue.split(",").join(".")
     inputValue = parseFloat(inputValue.split("%").join(""))
 
-    if (canBuy[values.currency] >= inputValue) {
-      login[values.currency] += inputValue
-      login.real = login.real - (quotations[values.currency].buy * inputValue)
+    if (canSell[values.currency] >= inputValue) {
+      login[values.currency] -= inputValue
+      login.real = login.real + (quotations[values.currency].sell * inputValue)
       await store.dispatch(updateUser(login))      
       setMsg({ error: "" })
+      document.getElementsByName("quantity")[0].value = ""
     } else {
       setMsg({ error: "Saldo insuficiente" })
     }
     setLoader({ loader: false })
   }
   return (
-    <div className="buy">
-      <h1 className="buy__title m-t-30">COMPRAR</h1>
+    <div className="sell">
+      <h1 className="sell__title m-t-30">VENDER</h1>
       <div className="row reverse m-t-30">
-        <div className="buy__can-buy">
-          <p className="buy__can-buy__title m-b-10">Disponível para compra:</p>
-          <p className="buy__can-buy__item m-b-3">
-            BTC: $ {canBuy.btc.toLocaleString("pt-BR")}
+        <div className="sell__can-sell">
+          <p className="sell__can-sell__title m-b-10">Disponível para venda:</p>
+          <p className="sell__can-sell__item m-b-3">
+            BTC: $ {canSell.btc.toLocaleString("pt-BR")}
           </p>
-          <p className="buy__can-buy__item  m-b-3">
-            Brita: $ {canBuy.brita.toLocaleString("pt-BR")}
+          <p className="sell__can-sell__item  m-b-3">
+            Brita: $ {canSell.brita.toLocaleString("pt-BR")}
           </p>
         </div>
         <Form
           initialValues={form.initialValues}
           fields={form.fields}
-          schema={BuySchema}
+          schema={ExchangeSchema}
           buttons={form.buttons}
           onSubmitForm={onSubmit}
           status={loader.loader}
-          clear={!msg.error}
         ></Form>
       </div>
       {msg.error ? (
-        <div className="buy__container">
-          <div className="buy__container__error">
+        <div className="sell__container">
+          <div className="sell__container__error">
             <MsgError error={msg.error}></MsgError>
           </div>
         </div>
@@ -134,4 +134,4 @@ function Buy() {
   )
 }
 
-export default Buy
+export default Exchange
