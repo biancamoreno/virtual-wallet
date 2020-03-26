@@ -9,7 +9,7 @@ import history from "@utils/history"
 import { storeUser } from "@actions"
 import store from "@store"
 
-const options = ["Início", "Transações", "Comprar", "Vender", "Sair"]
+const options = ["Início", "Transações", "Comprar", "Vender", "Trocar", "Sair"]
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper
@@ -48,6 +48,9 @@ function NavMenu() {
         history.push("/vender")
         break
       case 4:
+        history.push("/trocar")
+        break
+      case 5:
         store.dispatch(storeUser({}))
         history.push("/login")
         break

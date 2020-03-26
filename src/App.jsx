@@ -9,7 +9,6 @@ import Main from "@templates/main/Main"
 import axios from "axios"
 import { addQuotations } from "@actions/index"
 import store from "@store"
-// import { useSelector } from "react-redux"
 
 export default function App() {
   function formatDate(date) {
@@ -79,9 +78,6 @@ export default function App() {
           <Route exact path="/" component={Main}></Route>
           <Route exact path="/cadastro" component={Signup}></Route>
           <Route exact path="/login" component={Login}></Route>
-          {/* <Route exact path="/transacoes" component={Main}></Route>
-          <Route exact path="/comprar" component={Main}></Route>
-          <Route exact path="/vender" component={Main}></Route> */}
           <Route component={Main}></Route>
         </Switch>
       </div>

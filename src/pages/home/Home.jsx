@@ -9,6 +9,11 @@ function Home() {
     {
       label: "Transações",
       url: "/transacoes",
+      icon: "list_alt"
+    },
+    {
+      label: "Trocar",
+      url: "/trocar",
       icon: "swap_vert"
     },
     {

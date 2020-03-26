@@ -6,6 +6,7 @@ import Transactions from "@pages/transactions/Transactions"
 import Buy from "@pages/buy/Buy"
 import Sell from "@pages/sell/Sell"
 import history from '@utils/history';
+import Exchange from "@pages/exchange/Exchange";
 
 function Main() {
   return (
@@ -18,6 +19,7 @@ function Main() {
             <Route exact path="/transacoes" component={Transactions}></Route>
             <Route exact path="/comprar" component={Buy}></Route>
             <Route exact path="/vender" component={Sell}></Route>
+            <Route exact path="/trocar" component={Exchange}></Route>
             <Route component={Home}></Route>
           </Switch>
         </Router>

@@ -120,7 +120,7 @@ function Buy() {
           buttons={form.buttons}
           onSubmitForm={onSubmit}
           status={loader.loader}
-          clear={!msg.error}
+          clean={true}
         ></Form>
       </div>
       {msg.error ? (

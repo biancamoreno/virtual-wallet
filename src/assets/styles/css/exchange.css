@@ -784,43 +784,78 @@
   padding: 100px;
 }
 
-.home {
-  padding: 30px 0;
+.exchange__title {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #171c33;
 }
 @media (min-width: 768px) {
-  .home {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
-    grid-gap: 20px;
-    padding: 50px 0;
+  .exchange__title {
+    font-size: 24px;
   }
 }
-.home__btn {
+.exchange__can-change__title, .exchange__can-change__item {
+  color: #171c33;
+  font-size: 14px;
+}
+.exchange__can-change__item {
+  font-weight: 600;
+}
+.exchange__form {
+  margin-top: 20px;
+}
+.exchange .form {
   width: 100%;
-  height: 90px;
-  display: flex;
+  max-width: 600px;
+}
+@media (min-width: 768px) {
+  .exchange .form {
+    width: 70%;
+    max-width: 600px;
+    margin: 0 20px 0 0;
+  }
+}
+.exchange .row.reverse {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
-  text-transform: uppercase;
-  outline: none;
-  background-color: #fff;
-  border: 1px solid #cccccc;
-  transition: color 0.35s ease;
-  cursor: pointer;
-  margin-bottom: 10px;
 }
 @media (min-width: 768px) {
-  .home__btn {
-    height: 100px;
-    margin-bottom: 0;
+  .exchange .row.reverse {
+    flex-direction: row-reverse;
+    align-items: flex-end;
   }
 }
-.home__btn .material-icons {
-  margin-bottom: 10px;
+.exchange__container {
+  display: flex;
+  justify-content: center;
 }
-.home__btn:hover {
-  color: #0b903d;
-  transition: color 0.35s ease;
+.exchange__container__error {
+  position: relative;
+  width: 200px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f12500;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+@media (min-width: 768px) {
+  .exchange__container__error {
+    margin-left: -182px;
+  }
+}
+.exchange__container__error .msg-error {
+  color: #fff;
+  position: static;
+  margin-top: 0;
+  bottom: 0;
+}
+
+.value-change {
+  width: 80px;
+  text-align: center;
 }

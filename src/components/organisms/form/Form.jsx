@@ -13,7 +13,7 @@ class Form extends React.Component {
       "form__field--error": errors[field.name] && touched[field.name]
     })
 
-    function handleChange(event) {
+    function change(event) {
       setFieldValue(event.target.name, event.target.value)
     }
 
@@ -27,7 +27,7 @@ class Form extends React.Component {
             as={field.type}
             name={field.name}
             value={values[field.name]}
-            onChange={handleChange}
+            onChange={change}
           >
             <option value="none" disabled>
               {field.placeholder}
@@ -47,7 +47,8 @@ class Form extends React.Component {
             prefix={"$ "}
             placeholder={field.placeholder}
             value={values[field.name]}
-            onChange={handleChange}
+            onChange={change}
+            onInput={(values) => this.props.handleChange(values)}
           />
         ) : (
           <Field
@@ -86,13 +87,15 @@ class Form extends React.Component {
           validationSchema={this.props.schema}
           onSubmit={(values, { resetForm }) => {
             this.props.onSubmitForm(values)
-            resetForm({})
+            if (this.props.clean) resetForm({})
           }}
+          onInputField={this.props.onInputField}
+          handleChange={this.props.handleChange}
         >
-          {({ errors, touched, values, setFieldValue }) => (
-            <FormBuilder>
+          {({ errors, touched, values, setFieldValue, handleChange }) => (
+            <FormBuilder handleChange={this.props.handleChange}>
               {this.props.fields.map(field =>
-                this.renderFields(field, errors, touched, values, setFieldValue)
+                this.renderFields(field, errors, touched, values, setFieldValue, handleChange)
               )}
               {this.props.buttons.map((button, index) =>
                 this.renderButtons(button, index, this.props.status)

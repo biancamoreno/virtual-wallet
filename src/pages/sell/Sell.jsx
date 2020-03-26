@@ -121,6 +121,7 @@ function Sell() {
           buttons={form.buttons}
           onSubmitForm={onSubmit}
           status={loader.loader}
+          clean={true}
         ></Form>
       </div>
       {msg.error ? (

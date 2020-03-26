@@ -114,7 +114,7 @@ function Login() {
           <Form
             initialValues={form.initialValues}
             fields={form.fields}
-            loginSchema={LoginSchema}
+            schema={LoginSchema}
             buttons={form.buttons}
             onSubmitForm={onSubmit}
             status={formStates.loader}
