@@ -27,7 +27,10 @@ class Form extends React.Component {
             as={field.type}
             name={field.name}
             value={values[field.name]}
-            onChange={change}
+            onChange={values => {
+              change(values)
+              this.props.handleChange(values)
+            }}
           >
             <option value="none" disabled>
               {field.placeholder}
@@ -48,7 +51,7 @@ class Form extends React.Component {
             placeholder={field.placeholder}
             value={values[field.name]}
             onChange={change}
-            onInput={(values) => this.props.handleChange(values)}
+            onInput={values => this.props.handleChange(values)}
           />
         ) : (
           <Field
@@ -95,7 +98,14 @@ class Form extends React.Component {
           {({ errors, touched, values, setFieldValue, handleChange }) => (
             <FormBuilder handleChange={this.props.handleChange}>
               {this.props.fields.map(field =>
-                this.renderFields(field, errors, touched, values, setFieldValue, handleChange)
+                this.renderFields(
+                  field,
+                  errors,
+                  touched,
+                  values,
+                  setFieldValue,
+                  handleChange
+                )
               )}
               {this.props.buttons.map((button, index) =>
                 this.renderButtons(button, index, this.props.status)

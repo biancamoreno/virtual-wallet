@@ -805,17 +805,35 @@
 }
 .exchange__form {
   margin-top: 20px;
-}
-.exchange .form {
+  position: relative;
   width: 100%;
-  max-width: 600px;
 }
 @media (min-width: 768px) {
-  .exchange .form {
-    width: 70%;
-    max-width: 600px;
-    margin: 0 20px 0 0;
+  .exchange__form {
+    width: 500px;
   }
+}
+.exchange__form__container {
+  width: 100%;
+}
+.exchange__form__value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: calc(50% - 20px);
+}
+@media (min-width: 768px) {
+  .exchange__form__value {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+}
+.exchange .form__field {
+  width: 50%;
 }
 .exchange .row.reverse {
   flex-direction: column;
@@ -843,11 +861,6 @@
   border-radius: 6px;
   margin: 20px 0;
 }
-@media (min-width: 768px) {
-  .exchange__container__error {
-    margin-left: -182px;
-  }
-}
 .exchange__container__error .msg-error {
   color: #fff;
   position: static;
@@ -856,6 +869,16 @@
 }
 
 .value-change {
-  width: 80px;
+  width: 100%;
   text-align: center;
+  color: #171c33;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 20px;
+}
+@media (min-width: 768px) {
+  .value-change {
+    margin-top: 0;
+    width: calc(100% - 120px);
+  }
 }
