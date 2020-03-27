@@ -31,6 +31,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "2.1.1",
     "react-service-worker": "^0.1.1",
+    "react-window": "^1.8.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "yup": "^0.28.3"
