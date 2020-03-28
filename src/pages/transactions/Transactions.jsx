@@ -23,6 +23,9 @@ function Transactions() {
     if (!login.id) history.push("/login")
   } else history.push("/login")
 
+  const transactions = useSelector(state => state.data.transactions)
+  console.log(transactions)
+
   return (
     <div className="transactions">
       <h1 className="transactions__title m-t-30">TRANSAÇÕES</h1>

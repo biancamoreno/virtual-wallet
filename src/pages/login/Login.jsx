@@ -7,7 +7,7 @@ import "@css/login.css"
 import logo from "@images/cripto.png"
 import db from "@database/db"
 import history from "@utils/history"
-import { storeUser } from "@actions"
+import { storeUser, storeTransfers } from "@actions"
 import store from "@store"
 import LinkTo from "@atoms/link/Link"
 
@@ -69,8 +69,22 @@ function Login() {
   }, [login])
 
   async function getResolve(user) {
-    setStates({ error: "" })
     if (user && user.id) {
+      setStates({ error: "" })
+      let arrTransfers = []
+      await db.transfers
+        .where("userId")
+        .equals(user.id)
+        .each(transfer => {
+          arrTransfers.push(transfer)
+        })
+        .catch(error => {
+          setStates({ error: "Falha no login, tente novamente" })
+          return
+        })
+        
+      await store.dispatch(storeTransfers(arrTransfers))
+
       setLogin({
         id: user.id,
         email: user.email,
@@ -80,7 +94,7 @@ function Login() {
         btc: user.btc,
         brita: user.brita
       })
-    }
+    } else setStates({ error: "Falha no login, tente novamente" })
   }
 
   function onSubmit(values) {

@@ -8,6 +8,7 @@ import MsgError from "@atoms/msg-error/MsgError"
 import Icon from "@material-ui/core/Icon"
 import { updateUser } from "@actions"
 import store from "@store"
+import db from "@database/db"
 
 const ExchangeSchema = Yup.object().shape({
   currency: Yup.string()
@@ -19,6 +20,15 @@ const ExchangeSchema = Yup.object().shape({
 })
 
 function Exchange() {
+  db.transfers
+        .where(["userId", 1643682])
+        .first(transfer => {
+          console.log(transfer)
+        })
+        .catch(error => {
+          console.log(error)
+          return
+        })
   const login = useSelector(state => state.data.user)
   if (login) {
     if (!login.id) history.push("/login")

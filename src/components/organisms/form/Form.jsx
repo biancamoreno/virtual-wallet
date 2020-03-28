@@ -29,7 +29,7 @@ class Form extends React.Component {
             value={values[field.name]}
             onChange={values => {
               change(values)
-              this.props.handleChange(values)
+              if (this.props.handleChange) this.props.handleChange(values)
             }}
           >
             <option value="none" disabled>
@@ -51,7 +51,9 @@ class Form extends React.Component {
             placeholder={field.placeholder}
             value={values[field.name]}
             onChange={change}
-            onInput={values => this.props.handleChange(values)}
+            onInput={values => {
+              if (this.props.handleChange) this.props.handleChange(values)
+            }}
           />
         ) : (
           <Field
@@ -93,7 +95,9 @@ class Form extends React.Component {
             if (this.props.clean) resetForm({})
           }}
           onInputField={this.props.onInputField}
-          handleChange={this.props.handleChange}
+          handleChange={
+            this.props.handleChange ? this.props.handleChange : null
+          }
         >
           {({ errors, touched, values, setFieldValue, handleChange }) => (
             <FormBuilder handleChange={this.props.handleChange}>

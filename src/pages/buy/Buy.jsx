@@ -5,7 +5,7 @@ import history from "@utils/history"
 import Form from "@organisms/form/Form"
 import * as Yup from "yup"
 import MsgError from "@atoms/msg-error/MsgError"
-import { updateUser } from "@actions"
+import { updateUser, addTransfer } from "@actions"
 import store from "@store"
 
 const BuySchema = Yup.object().shape({
@@ -23,6 +23,8 @@ function Buy() {
     if (!login.id) history.push("/login")
   } else history.push("/login")
   const quotations = useSelector(state => state.data.quotations)
+  const transfers = useSelector(state => state.data.transfers)
+  console.log(transfers)
 
   const [form] = useState({
     initialValues: {
@@ -93,7 +95,8 @@ function Buy() {
     if (canBuy[values.currency] >= inputValue) {
       login[values.currency] += inputValue
       login.real = login.real - (quotations[values.currency].buy * inputValue)
-      await store.dispatch(updateUser(login))      
+      await store.dispatch(updateUser(login))
+      await store.dispatch(addTransfer(login.id, "buy", new Date(), values.currency, inputValue, "", 0))  
       setMsg({ error: "" })
     } else {
       setMsg({ error: "Saldo insuficiente" })

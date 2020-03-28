@@ -16,7 +16,7 @@ export function addUser(name, email, password) {
     const userAdd = { name, email, password, real: 100000, btc: 0, brita: 0 }
     db.users.put(userAdd).then(id => {
       dispatch({
-        type: "ADD_USER",
+        type: "LOAD_USERS",
         payload: Object.assign({}, userAdd, id)
       })
     })
@@ -34,11 +34,33 @@ export function updateUser(user) {
   }
 }
 
+// insert user in store
 export function storeUser(user) {
   return dispatch => {
     dispatch({
       type: "ADD_USER",
       payload: Object.assign({}, user)
+    })
+  }
+}
+
+export function addTransfer(userId, type, date, currencyBuy, valueBuy, currencySell, valueSell) {
+  return dispatch => {
+    const transferAdd = { userId, type, date, currencyBuy, valueBuy, currencySell, valueSell }
+    db.users.add(transferAdd).then(id => {
+      dispatch({
+        type: "ADD_TRANSFER",
+        payload: Object.assign({}, transferAdd, id)
+      })
+    })
+  }
+}
+
+export function storeTransfers(transfers) {
+  return dispatch => {
+    dispatch({
+      type: "ADD_TRANSFERS",
+      payload: transfers
     })
   }
 }
