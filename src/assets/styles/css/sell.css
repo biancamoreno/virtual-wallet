@@ -834,11 +834,6 @@
   border-radius: 6px;
   margin: 20px 0;
 }
-@media (min-width: 768px) {
-  .sell__container__error {
-    margin-left: -182px;
-  }
-}
 .sell__container__error .msg-error {
   color: #fff;
   position: static;

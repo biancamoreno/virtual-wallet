@@ -117,12 +117,14 @@ const Sell = () => {
     setValuesSell(values)
     setLoader({ loader: true })
     let inputValue = toFloat(values.quantity)
-    if (login[values.currency] >= inputValue) {
-      await handleClickOpen(values)
-      setMsg({ error: "" })
-    } else {
-      setMsg({ error: "Saldo insuficiente" })
-    }
+    if (inputValue > 0) {
+      if (login[values.currency] >= inputValue) {
+        await handleClickOpen(values)
+        setMsg({ error: "" })
+      } else {
+        setMsg({ error: "Saldo insuficiente" })
+      }
+    } else setMsg({ error: "Valor inválido" })
     setLoader({ loader: false })
   }
 

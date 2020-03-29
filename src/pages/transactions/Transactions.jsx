@@ -32,7 +32,7 @@ const Transactions = () => {
         className={"transactions__list " + classes.root}
         aria-label="transactions"
       >
-        {transfers[0]
+        {transfers && transfers[0]
           ? transfers.map((transfer, index) => {
               const type = transfer.type,
                 currencyBuy = transfer.currencyBuy.toUpperCase(),

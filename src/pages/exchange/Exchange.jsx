@@ -125,12 +125,14 @@ const Exchange = () => {
 
   const onSubmit = async () => {
     setLoader({ loader: true })
-    if (login[currency.selected] >= currency.inputValue) {
-      await handleClickOpen()
-      setMsg({ error: "" })
-    } else {
-      setMsg({ error: "Saldo insuficiente" })
-    }
+    if (currency.inputValue > 0) {
+      if (login[currency.selected] >= currency.inputValue) {
+        await handleClickOpen()
+        setMsg({ error: "" })
+      } else {
+        setMsg({ error: "Saldo insuficiente" })
+      }
+    } else setMsg({ error: "Valor inválido" })
     setLoader({ loader: false })
   }
 

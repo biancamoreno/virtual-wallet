@@ -131,12 +131,14 @@ const Buy = () => {
     setValuesBuy(values)
     setLoader({ loader: true })
     const inputValue = toFloat(values.quantity)
-    if (canBuy[values.currency] >= inputValue) {
-      await handleClickOpen(values, inputValue)
-      setMsg({ error: "" })
-    } else {
-      setMsg({ error: "Saldo insuficiente" })
-    }
+    if (inputValue > 0) {
+      if (canBuy[values.currency] >= inputValue) {
+        await handleClickOpen(values, inputValue)
+        setMsg({ error: "" })
+      } else {
+        setMsg({ error: "Saldo insuficiente" })
+      }
+    } else setMsg({ error: "Valor inválido" })
     setLoader({ loader: false })
   }
   return (

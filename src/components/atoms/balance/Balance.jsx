@@ -8,25 +8,24 @@ const Balance = () => {
 
   return (
     <div className="balance">
-      <div className="balance__principal">
-        <p className="balance__principal__title">Saldo</p>
-        <p className="m-t-5">
-          {new Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-          }).format(login.real)}
-        </p>
-      </div>
-      <div className="balance__secondary">
-        <div className="balance__secondary__item m-r-30">
-          <span className="m-r-5">BTC</span>
-          <span>$ {new Intl.NumberFormat("pt-BR").format(login.btc)}</span>
-        </div>
-        <div className="balance__secondary__item">
-          <span className="m-r-5">Brita</span>
-          <span>$ {new Intl.NumberFormat("pt-BR").format(login.brita)}</span>
-        </div>
-      </div>
+      {login ? (
+        <>
+          <div className="balance__principal">
+            <p className="balance__principal__title">Saldo</p>
+            <p className="m-t-5">R$ {login.real.toLocaleString("pt-BR")}</p>
+          </div>
+          <div className="balance__secondary">
+            <div className="balance__secondary__item m-r-30">
+              <span className="m-r-5">BTC</span>
+              <span>$ {login.btc.toLocaleString("pt-BR")}</span>
+            </div>
+            <div className="balance__secondary__item">
+              <span className="m-r-5">Brita</span>
+              <span>$ {login.brita.toLocaleString("pt-BR")}</span>
+            </div>
+          </div>
+        </>
+      ) : null}
     </div>
   )
 }

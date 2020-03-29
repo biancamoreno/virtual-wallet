@@ -51,10 +51,6 @@
       background-color: $msg-error;
       border-radius: 6px;
       margin: 20px 0;
-
-      @include respond-to("tablet") {
-        margin-left: -182px;
-      }
   
       .msg-error {
         color: #fff;
