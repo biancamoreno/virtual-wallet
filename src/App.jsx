@@ -28,33 +28,35 @@ export default function App() {
   }
 
   async function getBritaQuotation() {
-    let date = formatDate(new Date())
-    let requestBrita = await axios.get(
-      `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${date}'&$format=json`
-    )
+    let date = formatDate(new Date()),
+        requestBrita
 
-    if (!requestBrita.data.value[0]) {
-      date = formatDate(new Date(new Date().setDate(new Date().getDate()-1)))
+    // attempts to request data until obtain, even if it's from days ago
+    for (let i = 0; !requestBrita || !requestBrita.data.value[0]; i++) {
       requestBrita = await axios.get(
         `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${date}'&$format=json`
       )
+      if (!requestBrita.data.value[0]) date = formatDate(new Date(new Date().setDate(new Date().getDate() - (i + 1))))
     }
 
     return requestBrita
   }
 
-  function getCurrency() {
-    axios.all([getBtcQuotation(), getBritaQuotation()]).then(
+  async function getCurrency() {
+    axios.all([await getBtcQuotation(), await getBritaQuotation()]).then(
       axios.spread(function(btcQuot, britaQuot) {
-        const btcData = {
-          buy: parseFloat(btcQuot.data.ticker.buy),
-          sell: parseFloat(btcQuot.data.ticker.sell)
+        // just store quotations if have all quotations
+        if (btcQuot.data.ticker && britaQuot.data.value[0]) {
+          const btcData = {
+            buy: parseFloat(btcQuot.data.ticker.buy),
+            sell: parseFloat(btcQuot.data.ticker.sell)
+          }
+          const britaData = {
+            buy: britaQuot.data.value[0].cotacaoCompra,
+            sell: britaQuot.data.value[0].cotacaoVenda
+          }
+          store.dispatch(addQuotations({ brita: britaData, btc: btcData }))
         }
-        const britaData = {
-          buy: britaQuot.data.value[0].cotacaoCompra,
-          sell: britaQuot.data.value[0].cotacaoVenda
-        }
-        store.dispatch(addQuotations({ brita: britaData, btc: btcData }))
       })
     )
   }

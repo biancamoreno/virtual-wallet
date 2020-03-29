@@ -33,17 +33,20 @@ function Transactions() {
         aria-label="transactions"
       >
         {transfers
-          ? transfers.map(transfer => {
+          ? transfers.map((transfer, index) => {
               const type = transfer.type,
                 currencyBuy = transfer.currencyBuy.toUpperCase(),
                 valueBuy = transfer.valueBuy.toLocaleString("pt-BR"),
                 currencySell = transfer.currencySell.toUpperCase(),
                 valueSell = transfer.valueSell.toLocaleString("pt-BR"),
-                options = { year: "numeric", month: "2-digit", day: "2-digit" },
-                time = transfer.date
-                  .toTimeString("pt-BR")
-                  .replace(" GMT-0300 (Brasilia Standard Time)", ""),
-                date = transfer.date.toLocaleDateString("pt-BR", options),
+                formatter = new Intl.DateTimeFormat('pt-BR', {
+                  month: '2-digit',
+                  day: '2-digit',
+                  year: '2-digit',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                }),
+                dateTime = formatter.format(transfer.date),
                 item = {
                   icon:
                     type === "buy"
@@ -75,11 +78,12 @@ function Transactions() {
                   button
                   divider
                   className={"transactions__list__item transactions__list__item--" + type}
+                  key={index}
                 >
                   <Icon className="m-r-10">{item.icon}</Icon>
                   <ListItemText
                     primary={item.primary}
-                    secondary={date + " " + time}
+                    secondary={dateTime}
                   />
                   <span className="item-text">{item.text}</span>
                 </ListItem>

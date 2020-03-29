@@ -2,7 +2,7 @@ import React from "react"
 import "@css/home.css"
 import { useSelector } from "react-redux"
 import history from "@utils/history"
-import Icon from '@material-ui/core/Icon';
+import Icon from "@material-ui/core/Icon"
 
 function Home() {
   const buttons = [

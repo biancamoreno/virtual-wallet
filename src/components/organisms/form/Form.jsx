@@ -100,7 +100,7 @@ class Form extends React.Component {
           }
         >
           {({ errors, touched, values, setFieldValue, handleChange }) => (
-            <FormBuilder handleChange={this.props.handleChange}>
+            <FormBuilder>
               {this.props.fields.map(field =>
                 this.renderFields(
                   field,

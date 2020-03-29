@@ -98,7 +98,7 @@ function Login() {
 
   function onSubmit(values) {
     if (!quotations) {
-      setStates({ error: "Falha nas cotações" })
+      setStates({ error: "Falha nas cotações, tente mais tarde" })
       return
     }
 

@@ -34,7 +34,7 @@
 
     &__error {
       position: relative;
-      width: 200px;
+      width: 210px;
       height: 24px;
       display: flex;
       justify-content: center;
@@ -46,6 +46,7 @@
       .msg-error {
         color: #fff;
         position: static;
+        margin: 0;
       }
     }
   }

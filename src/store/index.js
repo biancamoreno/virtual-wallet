@@ -18,7 +18,7 @@ function wallet(state = INITIAL_STATE, action) {
         ...state,
         data: {
           ...state.data,
-          transfers: [ ...state.data.transfers, action.payload ]
+          transfers: [...state.data.transfers, action.payload]
         }
       }
     default:

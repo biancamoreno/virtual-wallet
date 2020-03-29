@@ -83,16 +83,21 @@ function Sell() {
     }
   }, [login])
 
+  function toFloat(value) {
+    value = value.replace("$ ", "")
+    value = value.split(".").join("%")
+    value = value.split(",").join(".")
+    value = parseFloat(value.split("%").join(""))
+    return value
+  }
+
   async function onSubmit(values) {
     setLoader({ loader: true })
-    let inputValue = values.quantity.replace("$ ", "")
-    inputValue = inputValue.split(".").join("%")
-    inputValue = inputValue.split(",").join(".")
-    inputValue = parseFloat(inputValue.split("%").join(""))
+    let inputValue = toFloat(values.quantity)
 
     if (canSell[values.currency] >= inputValue) {
       login[values.currency] -= inputValue
-      login.real = login.real + (quotations[values.currency].sell * inputValue)
+      login.real = login.real + quotations[values.currency].sell * inputValue
       await store.dispatch(updateUser(login))
       await store.dispatch(
         addTransfer(
