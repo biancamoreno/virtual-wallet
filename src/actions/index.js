@@ -7,7 +7,7 @@ export function loadUsers() {
         type: "LOAD_USERS",
         payload: users
       })
-    })
+    }).catch(error => console.log(error))
   }
 }
 
@@ -19,7 +19,7 @@ export function addUser(name, email, password) {
         type: "LOAD_USERS",
         payload: Object.assign({}, userAdd, id)
       })
-    })
+    }).catch(error => console.log(error))
   }
 }
 
@@ -30,7 +30,7 @@ export function updateUser(user) {
         type: "ADD_USER",
         payload: Object.assign({}, user)
       })
-    })
+    }).catch(error => console.log(error))
   }
 }
 
@@ -44,15 +44,31 @@ export function storeUser(user) {
   }
 }
 
-export function addTransfer(userId, type, date, currencyBuy, valueBuy, currencySell, valueSell) {
+export function addTransfer(
+  userId,
+  type,
+  date,
+  currencyBuy,
+  valueBuy,
+  currencySell,
+  valueSell
+) {
   return dispatch => {
-    const transferAdd = { userId, type, date, currencyBuy, valueBuy, currencySell, valueSell }
-    db.users.add(transferAdd).then(id => {
+    const transferAdd = {
+      userId: userId,
+      type: type,
+      date: date,
+      currencyBuy: currencyBuy,
+      valueBuy: valueBuy,
+      currencySell: currencySell,
+      valueSell: valueSell
+    }
+    db.transfers.add(transferAdd).then(id => {
       dispatch({
         type: "ADD_TRANSFER",
         payload: Object.assign({}, transferAdd, id)
       })
-    })
+    }).catch(error => console.log(error))
   }
 }
 

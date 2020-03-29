@@ -795,10 +795,48 @@
   font-size: 18px;
   font-weight: bold;
   color: #171c33;
+  margin-bottom: 20px;
 }
 @media (min-width: 768px) {
   .transactions__title {
     font-size: 24px;
     margin-bottom: 30px;
   }
+}
+.transactions__list {
+  display: flex;
+  flex-direction: column-reverse;
+  overflow: auto;
+  max-height: calc(100vh - 249px);
+}
+@media (min-width: 768px) {
+  .transactions__list {
+    max-height: calc(100vh - 222px);
+  }
+}
+.transactions__list__item.MuiButtonBase-root {
+  cursor: default;
+  background-color: #fff;
+}
+.transactions__list__item.MuiButtonBase-root:hover {
+  background-color: #fff;
+}
+.transactions__list__item:first-child {
+  border-bottom: 0;
+}
+.transactions__list__item .MuiListItemText-primary {
+  font-weight: bold;
+}
+.transactions__list__item--buy .material-icons {
+  color: #f12500;
+}
+.transactions__list__item--sell .material-icons {
+  color: #0b903d;
+}
+.transactions__list__item--exchange .material-icons {
+  color: #0015cf;
+}
+.transactions .item-text {
+  text-align: right;
+  line-height: 1.3;
 }

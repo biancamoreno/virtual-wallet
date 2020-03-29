@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "@css/exchange.css"
 import { useSelector } from "react-redux"
 import history from "@utils/history"
@@ -6,9 +6,8 @@ import Form from "@organisms/form/Form"
 import * as Yup from "yup"
 import MsgError from "@atoms/msg-error/MsgError"
 import Icon from "@material-ui/core/Icon"
-import { updateUser } from "@actions"
+import { updateUser, addTransfer } from "@actions"
 import store from "@store"
-import db from "@database/db"
 
 const ExchangeSchema = Yup.object().shape({
   currency: Yup.string()
@@ -20,15 +19,6 @@ const ExchangeSchema = Yup.object().shape({
 })
 
 function Exchange() {
-  db.transfers
-        .where(["userId", 1643682])
-        .first(transfer => {
-          console.log(transfer)
-        })
-        .catch(error => {
-          console.log(error)
-          return
-        })
   const login = useSelector(state => state.data.user)
   if (login) {
     if (!login.id) history.push("/login")
@@ -101,6 +91,17 @@ function Exchange() {
       login[currency.selected] -= currency.inputValue
       login[currency.changeFor] += currency.valueChanged
       await store.dispatch(updateUser(login))
+      await store.dispatch(
+        addTransfer(
+          login.id,
+          "exchange",
+          new Date(),
+          currency.changeFor,
+          currency.valueChanged,
+          currency.selected,
+          currency.inputValue
+        )
+      )
       setMsg({ error: "" })
       document.getElementsByName("quantity")[0].value = ""
     } else {

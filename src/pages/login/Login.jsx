@@ -78,11 +78,10 @@ function Login() {
         .each(transfer => {
           arrTransfers.push(transfer)
         })
-        .catch(error => {
+        .catch(() => {
           setStates({ error: "Falha no login, tente novamente" })
           return
         })
-        
       await store.dispatch(storeTransfers(arrTransfers))
 
       setLogin({
@@ -114,7 +113,7 @@ function Login() {
           else setStates({ error: "E-mail e/ou senha inválido" })
         }
       })
-      .catch(error => {
+      .catch(() => {
         setStates({ loader: false })
         setStates({ error: "Falha no login, tente novamente" })
       })

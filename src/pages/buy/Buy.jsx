@@ -23,8 +23,6 @@ function Buy() {
     if (!login.id) history.push("/login")
   } else history.push("/login")
   const quotations = useSelector(state => state.data.quotations)
-  const transfers = useSelector(state => state.data.transfers)
-  console.log(transfers)
 
   const [form] = useState({
     initialValues: {
@@ -87,16 +85,26 @@ function Buy() {
 
   async function onSubmit(values) {
     setLoader({ loader: true })
-    let inputValue = values.quantity.replace("$ ", "")
+    let inputValue = values.quantity.replace("$", "")
     inputValue = inputValue.split(".").join("%")
     inputValue = inputValue.split(",").join(".")
     inputValue = parseFloat(inputValue.split("%").join(""))
 
     if (canBuy[values.currency] >= inputValue) {
       login[values.currency] += inputValue
-      login.real = login.real - (quotations[values.currency].buy * inputValue)
+      login.real = login.real - quotations[values.currency].buy * inputValue
       await store.dispatch(updateUser(login))
-      await store.dispatch(addTransfer(login.id, "buy", new Date(), values.currency, inputValue, "", 0))  
+      await store.dispatch(
+        addTransfer(
+          login.id,
+          "buy",
+          new Date(),
+          values.currency,
+          inputValue,
+          "",
+          0
+        )
+      )
       setMsg({ error: "" })
     } else {
       setMsg({ error: "Saldo insuficiente" })
@@ -110,10 +118,10 @@ function Buy() {
         <div className="buy__can-buy">
           <p className="buy__can-buy__title m-b-10">Disponível para compra:</p>
           <p className="buy__can-buy__item m-b-3">
-            BTC: $ {canBuy.btc.toLocaleString("pt-BR")}
+            BTC: $&nbsp;{canBuy.btc.toLocaleString("pt-BR")}
           </p>
           <p className="buy__can-buy__item  m-b-3">
-            Brita: $ {canBuy.brita.toLocaleString("pt-BR")}
+            Brita: $&nbsp;{canBuy.brita.toLocaleString("pt-BR")}
           </p>
         </div>
         <Form

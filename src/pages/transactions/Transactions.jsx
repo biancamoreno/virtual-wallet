@@ -23,61 +23,69 @@ function Transactions() {
     if (!login.id) history.push("/login")
   } else history.push("/login")
 
-  const transactions = useSelector(state => state.data.transactions)
-  console.log(transactions)
+  const transfers = useSelector(state => state.data.transfers)
 
   return (
     <div className="transactions">
       <h1 className="transactions__title m-t-30">TRANSAÇÕES</h1>
       <List
-        className={classes.root}
+        className={"transactions__list " + classes.root}
         aria-label="transactions"
       >
-        <ListItem button divider>
-          <Icon className="m-r-10">arrow_downward</Icon>
-          <ListItemText primary="Comprou" secondary="Jan 9, 2014" />
-          Brita $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">arrow_upward</Icon>
-          <ListItemText primary="Vendeu" secondary="Jan 9, 2014" />
-          BTC $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">swap_vert</Icon>
-          <ListItemText primary="Trocou" secondary="Jan 9, 2014" />
-          BTC $ x por BTC $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">arrow_downward</Icon>
-          <ListItemText primary="Comprou" secondary="Jan 9, 2014" />
-          Brita $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">arrow_upward</Icon>
-          <ListItemText primary="Vendeu" secondary="Jan 9, 2014" />
-          BTC $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">swap_vert</Icon>
-          <ListItemText primary="Trocou" secondary="Jan 9, 2014" />
-          BTC $ x por BTC $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">arrow_downward</Icon>
-          <ListItemText primary="Comprou" secondary="Jan 9, 2014" />
-          Brita $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">arrow_upward</Icon>
-          <ListItemText primary="Vendeu" secondary="Jan 9, 2014" />
-          BTC $ x
-        </ListItem>
-        <ListItem button divider>
-          <Icon className="m-r-10">swap_vert</Icon>
-          <ListItemText primary="Trocou" secondary="Jan 9, 2014" />
-          BTC $ x por BTC $ x
-        </ListItem>
+        {transfers
+          ? transfers.map(transfer => {
+              const type = transfer.type,
+                currencyBuy = transfer.currencyBuy.toUpperCase(),
+                valueBuy = transfer.valueBuy.toLocaleString("pt-BR"),
+                currencySell = transfer.currencySell.toUpperCase(),
+                valueSell = transfer.valueSell.toLocaleString("pt-BR"),
+                options = { year: "numeric", month: "2-digit", day: "2-digit" },
+                time = transfer.date
+                  .toTimeString("pt-BR")
+                  .replace(" GMT-0300 (Brasilia Standard Time)", ""),
+                date = transfer.date.toLocaleDateString("pt-BR", options),
+                item = {
+                  icon:
+                    type === "buy"
+                      ? "arrow_downward"
+                      : type === "sell"
+                      ? "arrow_upward"
+                      : "swap_vert",
+                  primary:
+                    type === "buy"
+                      ? "Comprou"
+                      : type === "sell"
+                      ? "Vendeu"
+                      : "Trocou",
+                  text:
+                    type === "buy"
+                      ? currencyBuy + " $ " + valueBuy
+                      : type === "sell"
+                      ? currencySell + " $ " + valueSell
+                      : currencySell +
+                        " $ " +
+                        valueSell +
+                        " por " +
+                        currencyBuy +
+                        " $ " +
+                        valueBuy
+                }
+              return (
+                <ListItem
+                  button
+                  divider
+                  className={"transactions__list__item transactions__list__item--" + type}
+                >
+                  <Icon className="m-r-10">{item.icon}</Icon>
+                  <ListItemText
+                    primary={item.primary}
+                    secondary={date + " " + time}
+                  />
+                  <span className="item-text">{item.text}</span>
+                </ListItem>
+              )
+            })
+          : null}
       </List>
     </div>
   )

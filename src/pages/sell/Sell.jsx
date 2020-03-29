@@ -5,7 +5,7 @@ import history from "@utils/history"
 import Form from "@organisms/form/Form"
 import * as Yup from "yup"
 import MsgError from "@atoms/msg-error/MsgError"
-import { updateUser } from "@actions"
+import { updateUser, addTransfer } from "@actions"
 import store from "@store"
 
 const SellSchema = Yup.object().shape({
@@ -93,7 +93,18 @@ function Sell() {
     if (canSell[values.currency] >= inputValue) {
       login[values.currency] -= inputValue
       login.real = login.real + (quotations[values.currency].sell * inputValue)
-      await store.dispatch(updateUser(login))      
+      await store.dispatch(updateUser(login))
+      await store.dispatch(
+        addTransfer(
+          login.id,
+          "sell",
+          new Date(),
+          "",
+          0,
+          values.currency,
+          inputValue
+        )
+      )
       setMsg({ error: "" })
       document.getElementsByName("quantity")[0].value = ""
     } else {
@@ -108,10 +119,10 @@ function Sell() {
         <div className="sell__can-sell">
           <p className="sell__can-sell__title m-b-10">Disponível para venda:</p>
           <p className="sell__can-sell__item m-b-3">
-            BTC: $ {canSell.btc.toLocaleString("pt-BR")}
+            BTC: $&nbsp;{canSell.btc.toLocaleString("pt-BR")}
           </p>
           <p className="sell__can-sell__item  m-b-3">
-            Brita: $ {canSell.brita.toLocaleString("pt-BR")}
+            Brita: $&nbsp;{canSell.brita.toLocaleString("pt-BR")}
           </p>
         </div>
         <Form
