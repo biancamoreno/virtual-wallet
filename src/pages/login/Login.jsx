@@ -21,7 +21,7 @@ const LoginSchema = Yup.object().shape({
     .nullable()
 })
 
-function Login() {
+const Login = () => {
   const loginStore = useSelector(state => state.data)
   if (loginStore.id) history.push("/")
   const quotations = useSelector(state => state.data.quotations)
@@ -68,7 +68,7 @@ function Login() {
     }
   }, [login])
 
-  async function getResolve(user) {
+  const getResolve = async (user) => {
     if (user && user.id) {
       setStates({ error: "" })
       let arrTransfers = []
@@ -96,7 +96,7 @@ function Login() {
     } else setStates({ error: "Falha no login, tente novamente" })
   }
 
-  function onSubmit(values) {
+  const onSubmit = (values) => {
     if (!quotations) {
       setStates({ error: "Falha nas cotações, tente mais tarde" })
       return

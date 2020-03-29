@@ -8,6 +8,7 @@ import MsgError from "@atoms/msg-error/MsgError"
 import Icon from "@material-ui/core/Icon"
 import { updateUser, addTransfer } from "@actions"
 import store from "@store"
+import SimpleModal from "@organisms/simpleModal/SimpleModal"
 
 const ExchangeSchema = Yup.object().shape({
   currency: Yup.string()
@@ -18,7 +19,7 @@ const ExchangeSchema = Yup.object().shape({
     .nullable()
 })
 
-function Exchange() {
+const Exchange = () => {
   const login = useSelector(state => state.data.user)
   if (login) {
     if (!login.id) history.push("/login")
@@ -77,7 +78,18 @@ function Exchange() {
     error: ""
   })
 
-  function toFloat(value) {
+  const [open, setOpen] = React.useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = async val => {
+    setOpen(false)
+    if (val) await registerExchange()
+  }
+
+  const toFloat = value => {
     value = value.replace("$ ", "")
     value = value.split(".").join("%")
     value = value.split(",").join(".")
@@ -85,32 +97,44 @@ function Exchange() {
     return value
   }
 
-  async function onSubmit() {
+  const registerExchange = async () => {
+    login[currency.selected] -= currency.inputValue
+    login[currency.changeFor] += currency.valueChanged
+    await store.dispatch(updateUser(login))
+    await store.dispatch(
+      addTransfer(
+        login.id,
+        "exchange",
+        new Date(),
+        currency.changeFor,
+        currency.valueChanged,
+        currency.selected,
+        currency.inputValue
+      )
+    )
+    setTimeout(() => {
+      setCurrency({
+        ...currency,
+        valueChanged: "",
+        changeFor: 0
+      })
+      document.getElementsByName("currency")[0].value = "none"
+      document.getElementsByName("quantity")[0].value = ""
+    }, 200)
+  }
+
+  const onSubmit = async () => {
     setLoader({ loader: true })
     if (login[currency.selected] >= currency.inputValue) {
-      login[currency.selected] -= currency.inputValue
-      login[currency.changeFor] += currency.valueChanged
-      await store.dispatch(updateUser(login))
-      await store.dispatch(
-        addTransfer(
-          login.id,
-          "exchange",
-          new Date(),
-          currency.changeFor,
-          currency.valueChanged,
-          currency.selected,
-          currency.inputValue
-        )
-      )
+      await handleClickOpen()
       setMsg({ error: "" })
-      document.getElementsByName("quantity")[0].value = ""
     } else {
       setMsg({ error: "Saldo insuficiente" })
     }
     setLoader({ loader: false })
   }
 
-  function handleInput(values) {
+  const handleInput = values => {
     let name = values.currentTarget.name,
       value = values.currentTarget.value,
       inputValue = null,
@@ -191,6 +215,28 @@ function Exchange() {
           </div>
         </div>
       </div>
+      <SimpleModal
+        open={open}
+        onClose={handleClose}
+        action={
+          "trocar " +
+          (currency && currency.selected
+            ? currency.selected.toUpperCase()
+            : "") +
+          " " +
+          (currency && currency.inputValue
+            ? currency.inputValue.toLocaleString("pt-BR")
+            : "") +
+          " por " +
+          (currency && currency.changeFor
+            ? currency.changeFor.toUpperCase()
+            : "") +
+          " " +
+          (currency && currency.valueChanged
+            ? currency.valueChanged.toLocaleString("pt-BR")
+            : "")
+        }
+      ></SimpleModal>
     </div>
   )
 }

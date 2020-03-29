@@ -13,7 +13,7 @@ class Form extends React.Component {
       "form__field--error": errors[field.name] && touched[field.name]
     })
 
-    function change(event) {
+    const change = (event) => {
       setFieldValue(event.target.name, event.target.value)
     }
 
@@ -90,10 +90,7 @@ class Form extends React.Component {
           validateOnChange
           initialValues={this.props.initialValues}
           validationSchema={this.props.schema}
-          onSubmit={(values, { resetForm }) => {
-            this.props.onSubmitForm(values)
-            if (this.props.clean) resetForm({})
-          }}
+          onSubmit={values => this.props.onSubmitForm(values)}
           onInputField={this.props.onInputField}
           handleChange={
             this.props.handleChange ? this.props.handleChange : null

@@ -23,7 +23,7 @@ const SignupSchema = Yup.object().shape({
     .nullable()
 })
 
-function Signup() {
+const Signup = () => {
   const [form] = useState({
     initialValues: {
       name: "",
@@ -65,7 +65,7 @@ function Signup() {
     error: ""
   })
 
-  function onSubmit(values) {
+  const onSubmit = (values) => {
     setStates({ loader: true })
 
     db.users

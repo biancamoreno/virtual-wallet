@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "@css/sell.css"
 import { useSelector } from "react-redux"
 import history from "@utils/history"
@@ -7,6 +7,7 @@ import * as Yup from "yup"
 import MsgError from "@atoms/msg-error/MsgError"
 import { updateUser, addTransfer } from "@actions"
 import store from "@store"
+import SimpleModal from "@organisms/simpleModal/SimpleModal"
 
 const SellSchema = Yup.object().shape({
   currency: Yup.string()
@@ -17,7 +18,7 @@ const SellSchema = Yup.object().shape({
     .nullable()
 })
 
-function Sell() {
+const Sell = () => {
   const login = useSelector(state => state.data.user)
   if (login) {
     if (!login.id) history.push("/login")
@@ -61,11 +62,6 @@ function Sell() {
     ]
   })
 
-  const [canSell, updateCanSell] = useState({
-    brita: 0,
-    btc: 0
-  })
-
   const [loader, setLoader] = useState({
     loader: false
   })
@@ -74,16 +70,11 @@ function Sell() {
     error: ""
   })
 
-  useEffect(() => {
-    if (login) {
-      updateCanSell({
-        brita: login.brita,
-        btc: login.btc
-      })
-    }
-  }, [login])
+  const [valuesSell, setValuesSell] = React.useState({})
 
-  function toFloat(value) {
+  const [open, setOpen] = React.useState(false)
+
+  const toFloat = value => {
     value = value.replace("$ ", "")
     value = value.split(".").join("%")
     value = value.split(",").join(".")
@@ -91,45 +82,54 @@ function Sell() {
     return value
   }
 
-  async function onSubmit(values) {
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = async val => {
+    setOpen(false)
+    if (val) await registerSell(valuesSell)
+  }
+
+  const registerSell = async values => {
+    let inputValue = toFloat(values.quantity)
+    login[values.currency] -= inputValue
+    login.real = login.real + quotations[values.currency].sell * inputValue
+    await store.dispatch(updateUser(login))
+    await store.dispatch(
+      addTransfer(
+        login.id,
+        "sell",
+        new Date(),
+        "",
+        0,
+        values.currency,
+        inputValue
+      )
+    )
+    setTimeout(() => {
+      document.getElementsByName("currency")[0].value = "none"
+      document.getElementsByName("quantity")[0].value = ""
+    }, 200)
+  }
+
+  const onSubmit = async values => {
+    setValuesSell(values)
     setLoader({ loader: true })
     let inputValue = toFloat(values.quantity)
-
-    if (canSell[values.currency] >= inputValue) {
-      login[values.currency] -= inputValue
-      login.real = login.real + quotations[values.currency].sell * inputValue
-      await store.dispatch(updateUser(login))
-      await store.dispatch(
-        addTransfer(
-          login.id,
-          "sell",
-          new Date(),
-          "",
-          0,
-          values.currency,
-          inputValue
-        )
-      )
+    if (login[values.currency] >= inputValue) {
+      await handleClickOpen(values)
       setMsg({ error: "" })
-      document.getElementsByName("quantity")[0].value = ""
     } else {
       setMsg({ error: "Saldo insuficiente" })
     }
     setLoader({ loader: false })
   }
+
   return (
     <div className="sell">
       <h1 className="sell__title m-t-30">VENDER</h1>
       <div className="row reverse m-t-30">
-        <div className="sell__can-sell">
-          <p className="sell__can-sell__title m-b-10">Disponível para venda:</p>
-          <p className="sell__can-sell__item m-b-3">
-            BTC: $&nbsp;{canSell.btc.toLocaleString("pt-BR")}
-          </p>
-          <p className="sell__can-sell__item  m-b-3">
-            Brita: $&nbsp;{canSell.brita.toLocaleString("pt-BR")}
-          </p>
-        </div>
         <Form
           initialValues={form.initialValues}
           fields={form.fields}
@@ -137,7 +137,6 @@ function Sell() {
           buttons={form.buttons}
           onSubmitForm={onSubmit}
           status={loader.loader}
-          clean={true}
         ></Form>
       </div>
       {msg.error ? (
@@ -147,6 +146,20 @@ function Sell() {
           </div>
         </div>
       ) : null}
+      <SimpleModal
+        open={open}
+        onClose={handleClose}
+        action={
+          "vender " +
+          (valuesSell && valuesSell.currency
+            ? valuesSell.currency.toUpperCase()
+            : "") +
+          " " +
+          (valuesSell && valuesSell.quantity
+            ? valuesSell.quantity.toLocaleString("pt-BR")
+            : "")
+        }
+      ></SimpleModal>
     </div>
   )
 }

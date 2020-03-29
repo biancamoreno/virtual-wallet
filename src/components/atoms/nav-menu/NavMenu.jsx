@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 }))
 const ITEM_HEIGHT = 48
 
-function NavMenu() {
+const NavMenu = () => {
   const classes = useStyles()
   const [selectedIndex, setSelectedIndex] = React.useState(0)
   const [anchorEl, setAnchorEl] = React.useState(null)

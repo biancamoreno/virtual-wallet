@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Transactions() {
+const Transactions = () => {
   const classes = useStyles()
   const login = useSelector(state => state.data.user)
   if (login) {
@@ -32,7 +32,7 @@ function Transactions() {
         className={"transactions__list " + classes.root}
         aria-label="transactions"
       >
-        {transfers
+        {transfers[0]
           ? transfers.map((transfer, index) => {
               const type = transfer.type,
                 currencyBuy = transfer.currencyBuy.toUpperCase(),
@@ -89,7 +89,7 @@ function Transactions() {
                 </ListItem>
               )
             })
-          : null}
+          : <span className="empty-msg">Não há transações até o momento</span>}
       </List>
     </div>
   )

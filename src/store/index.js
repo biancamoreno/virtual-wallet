@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   data: {}
 }
 
-function wallet(state = INITIAL_STATE, action) {
+const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "ADD_USER":
       return { ...state, data: { ...state.data, user: action.payload } }

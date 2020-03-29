@@ -7,7 +7,7 @@
   border-radius: 9px;
   border: 0;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.4);
-  background-color: #cccccc;
+  background-color: #b6b6b6;
   box-sizing: border-box;
   outline: none;
   cursor: pointer;
@@ -35,7 +35,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: #cccccc;
+  background-color: #b6b6b6;
   background-image: url(../../images/loader.gif);
 }
 .btn--primary {

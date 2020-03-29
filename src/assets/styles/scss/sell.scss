@@ -14,18 +14,6 @@
     }
   }
 
-  &__can-sell {
-    &__title,
-    &__item {
-      color: $secondary;
-      font-size: 14px;
-    }
-
-    &__item {
-      font-weight: 600;
-    }
-  }
-
   .form {
     width: 100%;
     max-width: 600px;

@@ -2,7 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import "@css/balance.css"
 
-function Balance() {
+const Balance = () => {
   let login = useSelector(state => state.data.user)
   login = login ? login : { real: "", btc: "", brita: "" }
 

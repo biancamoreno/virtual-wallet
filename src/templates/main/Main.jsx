@@ -8,7 +8,7 @@ import Sell from "@pages/sell/Sell"
 import history from '@utils/history';
 import Exchange from "@pages/exchange/Exchange";
 
-function Main() {
+const Main = () => {
   return (
     <div className="main">
       <Header></Header>

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import history from "@utils/history"
 import Icon from "@material-ui/core/Icon"
 
-function Home() {
+const Home = () => {
   const buttons = [
     {
       label: "Transações",
@@ -29,7 +29,7 @@ function Home() {
   ]
 
   const login = useSelector(state => state.data.user)
-  function clickBtn(e, url) {
+  const clickBtn = (e, url) => {
     e.preventDefault()
     e.stopPropagation()
     history.push(url)

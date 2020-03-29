@@ -10,8 +10,8 @@ import axios from "axios"
 import { addQuotations } from "@actions/index"
 import store from "@store"
 
-export default function App() {
-  function formatDate(date) {
+const App = () => {
+  const formatDate = (date) => {
     let d = new Date(date),
       month = "" + (d.getMonth() + 1),
       day = "" + d.getDate(),
@@ -23,11 +23,11 @@ export default function App() {
     return [month, day, year].join("-")
   }
 
-  function getBtcQuotation() {
+  const getBtcQuotation = () => {
     return axios.get("https://www.mercadobitcoin.net/api/BTC/ticker/")
   }
 
-  async function getBritaQuotation() {
+  const getBritaQuotation = async () => {
     let date = formatDate(new Date()),
         requestBrita
 
@@ -42,7 +42,7 @@ export default function App() {
     return requestBrita
   }
 
-  async function getCurrency() {
+  const getCurrency = async () => {
     axios.all([await getBtcQuotation(), await getBritaQuotation()]).then(
       axios.spread(function(btcQuot, britaQuot) {
         // just store quotations if have all quotations
@@ -86,3 +86,5 @@ export default function App() {
     </Router>
   )
 }
+
+export default App

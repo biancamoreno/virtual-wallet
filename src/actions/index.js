@@ -4,7 +4,7 @@ import db from "@database/db"
   USERS
 */
 
-export function loadUsers() {
+export const loadUsers = () => {
   return dispatch => {
     db.users
       .toArray()
@@ -18,7 +18,7 @@ export function loadUsers() {
   }
 }
 
-export function addUser(name, email, password) {
+export const addUser = (name, email, password) => {
   return dispatch => {
     const userAdd = { name, email, password, real: 100000, btc: 0, brita: 0 }
     db.users
@@ -33,7 +33,7 @@ export function addUser(name, email, password) {
   }
 }
 
-export function updateUser(user) {
+export const updateUser = (user) => {
   return dispatch => {
     db.users
       .put(user)
@@ -47,7 +47,7 @@ export function updateUser(user) {
   }
 }
 
-export function storeUser(user) {
+export const storeUser = (user) => {
   return dispatch => {
     dispatch({
       type: "ADD_USER",
@@ -60,7 +60,7 @@ export function storeUser(user) {
   TRANSACTIONS
 */
 
-export function addTransfer(
+export const addTransfer = (
   userId,
   type,
   date,
@@ -68,7 +68,7 @@ export function addTransfer(
   valueBuy,
   currencySell,
   valueSell
-) {
+) => {
   return dispatch => {
     const transferAdd = {
       userId: userId,
@@ -91,7 +91,7 @@ export function addTransfer(
   }
 }
 
-export function storeTransfers(transfers) {
+export const storeTransfers = (transfers) => {
   return dispatch => {
     dispatch({
       type: "ADD_TRANSFERS",
@@ -103,7 +103,7 @@ export function storeTransfers(transfers) {
 /*
   QUOTATIONS
 */
-export function addQuotations(quotations) {
+export const addQuotations = (quotations) => {
   return dispatch => {
     dispatch({
       type: "ADD_QUOTATIONS",
