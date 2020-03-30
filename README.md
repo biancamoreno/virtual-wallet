@@ -21,19 +21,6 @@
 
 
 
-## Índice
-
-* [Sobre](#about-the-project)
-  * [Como foi feito](#built-with)
-* [Inicialização](#getting-started)
-  * [Pré-Requisitos](#prerequisites)
-  * [Instalação](#installation)
-* [Mapa do Projeto](#map)
-* [Contato](#contact)
-* [Reconhecimentos](#acknowledgements)
-
-
-
 ## Sobre
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
@@ -88,6 +75,14 @@ git clone https://github.com/biancamoreno/virtual-wallet.git
 2. Instale o NPM
 ```sh
 npm install
+```
+
+
+## Build
+
+Para gerar o build do projeto, no terminal execute o comando:
+```sh
+npm run build
 ```
 
 
