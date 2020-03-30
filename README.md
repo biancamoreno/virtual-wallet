@@ -71,7 +71,7 @@ npm install npm@latest -g
 ```sh
 git clone https://github.com/biancamoreno/virtual-wallet.git
 ```
-2. Instale o NPM
+2. Instale as dependências
 ```sh
 npm install
 ```
