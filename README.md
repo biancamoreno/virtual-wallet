@@ -8,8 +8,7 @@
   <p align="center">
     O Virtual Wallet é um sistema que fornece carteiras virtuais de criptomoedas para a realização de movimentações monetárias, desenvolvido para a StoneCo.
     <br />
-    <a href="https://gist.github.com/renatazenaro/4f68af50c12a0c324404dec849242eed"><strong>Mais detalhes »</strong></a>
-    <a href="https://github.com/biancamoreno/virtual-wallet">Abrir repositório no GitHub</a>
+    <a href="https://github.com/biancamoreno/virtual-wallet"><strong>Abrir repositório no GitHub »</strong></a>
   </p>
 </p>
 <br />
