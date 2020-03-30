@@ -15,6 +15,7 @@
     "classnames": "^2.2.6",
     "dexie": "^2.0.4",
     "formik": "^2.1.4",
+    "fsevents": "^2.1.2",
     "material-design-icons": "^3.0.1",
     "material-design-icons-iconfont": "^5.0.1",
     "react": "^16.13.0",
@@ -34,14 +35,14 @@
     "react-window": "^1.8.5",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "tree-cli": "^0.6.4",
     "yup": "^0.28.3"
   },
   "scripts": {
     "start-js": "react-app-rewired start",
     "start": "npm-run-all -p sass start-js",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject",
+    "test": "jest --watch",
     "format": " prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"src/**/*.{js,jsx}\" ",
     "lint": "./node_modules/.bin/eslint **/*.{js,jsx} --quiet",
     "sass": "sass --no-source-map --watch src/assets/styles/scss:src/assets/styles/css"
@@ -50,7 +51,8 @@
     "extends": "react-app"
   },
   "jest": {
-    "preset": "jest-runner-prettier"
+    "preset": "jest-runner-prettier",
+    "verbose": true
   },
   "browserslist": {
     "production": [
@@ -72,9 +74,12 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "gh-pages": "^2.2.0",
     "jest-runner-prettier": "^0.3.6",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
-    "react-app-rewired": "^1.6.2"
-  }
+    "react-app-rewired": "^1.6.2",
+    "react-test-renderer": "^16.13.1"
+  },
+  "homepage": "https://biancamoreno.github.io/virtual-wallet/"
 }
