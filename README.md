@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://https://github.com/biancamoreno/virtual-wallet">
+  <a href="https://github.com/biancamoreno/virtual-wallet">
     <img src="src/assets/images/cripto.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -9,6 +9,7 @@
     O Virtual Wallet é um sistema que fornece carteiras virtuais de criptomoedas para a realização de movimentações monetárias, desenvolvido para a StoneCo.
     <br />
     <a href="https://gist.github.com/renatazenaro/4f68af50c12a0c324404dec849242eed"><strong>Mais detalhes »</strong></a>
+    <a href="https://github.com/biancamoreno/virtual-wallet">Abrir repositório no GitHub</a>
   </p>
 </p>
 <br />
